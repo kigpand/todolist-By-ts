@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import LoginInput from '../components/LoginInput';
 import LoginBtn from '../components/LoginBtn';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
+
+export type LoginType = {
+    id : string,
+    pw : string
+}
 
 const LoginWrapper = styled.div`
     width : 100vw;
@@ -35,15 +40,14 @@ const LoginWrapper = styled.div`
 `;
 const Login = () =>{
 
-    const [id, setId] = useState<string>();
-    const [pw, setPw] = useState<string>();
+    const [loginInfo, setLoginInfo] = useState<LoginType>({ id: null, pw: null});
 
     const onSetId = (id: string) =>{
-        setId(id);
+        setLoginInfo({ id : id, pw: loginInfo.pw });
     }
 
     const onSetPw = (pw: string) =>{
-        setPw(pw);
+        setLoginInfo({ id: loginInfo.id, pw: pw });
     }
 
     return(
@@ -52,7 +56,7 @@ const Login = () =>{
                 <div className="title">WelCome!</div>
                 <div className="otherLogin">Other</div>
                 <LoginInput onSetId={onSetId} onSetPw={onSetPw}/>
-                <LoginBtn id={id} pw={pw}/>
+                <LoginBtn id = {loginInfo.id} pw = {loginInfo.pw}/>
             </div>
         </LoginWrapper>
     )

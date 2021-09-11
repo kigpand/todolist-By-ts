@@ -1,4 +1,7 @@
+import { useRouter } from 'next/dist/client/router';
+import React from 'react';
 import styled from 'styled-components';
+import { LoginType } from '../pages/Login';
 
 const BtnWrapper = styled.div`
     width : 100%;
@@ -36,11 +39,12 @@ const BtnWrapper = styled.div`
         }
     }
 `;
-const LoginBtn = ({ id, pw }) =>{
+
+const LoginBtn = ({ id, pw } : LoginType) =>{
+    const router = useRouter();
 
     const onLoginSubmit = () =>{
-        console.log(`id : ${id}`);
-        console.log(`pw : ${pw}`);
+        router.push('/TodoList')
     }
 
     const onJoin = () =>{
