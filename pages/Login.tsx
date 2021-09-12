@@ -71,7 +71,7 @@ const Login = () =>{
                 <div className="title">WelCome!</div>
                 <div className="otherLogin">Other</div>
                 <LoginInput onSetId={onSetId} onSetPw={onSetPw}/>
-                <LoginBtn loginType = {loginInfo} />
+                <LoginBtn id = {loginInfo.id} pw = {loginInfo.pw}/>
             </div>
         </LoginWrapper>
     )
