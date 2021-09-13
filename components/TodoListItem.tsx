@@ -1,5 +1,5 @@
-import {  TodoItemType } from '../pages/TodoList';
 import styled from 'styled-components';
+import { TodoItemType } from '../recoil/recoil';
 
 interface Props {
     list : TodoItemType;
@@ -7,9 +7,10 @@ interface Props {
 }
 
 const ItemWrapper = styled.div`
+    width : 80%;
     display : flex;
-    justify-content : space-around;
-
+    margin : 1rem 0 0 1rem;
+    
     .closeBtn{
         &:hover{
             cursor : pointer;
