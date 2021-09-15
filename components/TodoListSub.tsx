@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const SubStyled = styled.div`
     width : 500px;
     height : 700px;
-    background-color : lightgreen;
+    background-color : #EDFF75;
     z-index : 1;
 `;
 const TodoListSub = () =>{

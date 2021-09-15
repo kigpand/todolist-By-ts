@@ -25,17 +25,15 @@ const BtnWrapper = styled.div`
 
     .loginBtn{
         background-color : lightblue;
-
         &:hover{
             background-color : skyblue;
         }
     }
 
     .joinBtn{
-        background-color : gray;
-
+        background-color : #EDFF75;
         &:hover{
-            background-color : darkgray;
+            background-color : yellow;
         }
     }
 `;

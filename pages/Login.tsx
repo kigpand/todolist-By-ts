@@ -31,8 +31,8 @@ const LoginWrapper = styled.div`
         height : 600px;
         border-radius : 8px;
         box-shadow: 0px 0px 29px -2px #000000;
-        background-color : black;
-        color : white;
+        background-color : none;
+        color : black;
         font-family: 'HSYuji-Regular';
         display : flex;
         flex-direction: column;

@@ -30,9 +30,12 @@ const MainWrapper = styled.div`
 
 `;
 
-const TodoListMain = () =>{
+interface Props{
+    onOpenDialog: () => void;
+}
 
-    const [dialog, setDialog] = useState<boolean>(false);
+const TodoListMain = ({ onOpenDialog }: Props) =>{
+
     const [todoList, setTodoList] = useRecoilState(todoListArray);
 
     useEffect(()=>{
@@ -44,17 +47,9 @@ const TodoListMain = () =>{
         setTodoList({ date : todoList.date, item : [...result] });
     }
 
-    const onOpenDialog = () =>{
-        setDialog(true);
-    }
-
-    const onCloseDialog = () =>{
-        setDialog(false);
-    }
 
     return(
         <MainWrapper>
-            { dialog && <TodoListDialog onCloseDialog={onCloseDialog}/>}
             <div className = "title">{todoList.date.getFullYear()}년 {todoList.date.getMonth()}월 {todoList.date.getDate()}일</div>
             <div className = "line" />
             {todoList.item.map((v) =>{
