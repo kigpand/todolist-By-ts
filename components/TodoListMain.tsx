@@ -1,33 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { todoListArray, TodoItemType } from '../recoil/recoil';
-import TodoListDialog from './TodoListDialog';
 import TodoListItem from './TodoListItem';
 import { dummyArray } from '../pages/dummy';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 const MainWrapper = styled.div`
     background-color : white;
-    width : 500px;
-    height : 700px;
+    width : 400px;
+    height : 600px;
+    border-radius : 20px;
     z-index : 1;
     display : flex;
     flex-direction : column;
 
     .line{
         margin : 1rem 0 0 1rem;
-        width : 90%;
+        width : 100%;
         height : 3px;
         background-color : lightgray;
     }
 
     .title{
         width : 80%;
+        height : 10%;
         margin : 1rem 0 0 1rem;
         font-size : 1.2rem;
         font-weight : bold;
     }
 
+    .lists{
+        width : 100%;
+        height : 80%;
+    }
+
+    .addBtn{
+        width : 100%;
+        height : 10%;
+        display : flex;
+        align-items: center;
+        justify-content : center;
+
+        .addIcon{
+            font-size : 2rem;
+            color : green;
+
+            &:hover{
+                color : darkgreen;
+                cursor : pointer;
+            }
+        }
+    }
 `;
 
 interface Props{
@@ -50,13 +74,17 @@ const TodoListMain = ({ onOpenDialog }: Props) =>{
 
     return(
         <MainWrapper>
-            <div className = "title">{todoList.date.getFullYear()}년 {todoList.date.getMonth()}월 {todoList.date.getDate()}일</div>
-            <div className = "line" />
-            {todoList.item.map((v) =>{
-                return( 
-                <TodoListItem key={v.id} list={v} onItemRemove={onItemRemove}/>
-            )})}
-            <div className="addBtn" onClick={onOpenDialog}>더하기</div>
+            <div className = "title">
+                {todoList.date.getFullYear()}년 {todoList.date.getMonth()}월 {todoList.date.getDate()}일
+                <div className = "line" />
+            </div>
+            <div className="lists">
+                {todoList.item.map((v) =>{
+                    return( 
+                    <TodoListItem key={v.id} list={v} onItemRemove={onItemRemove}/>
+                )})}
+            </div>
+            <div className="addBtn" onClick={onOpenDialog}><AddCircleOutlineIcon className="addIcon"/></div>
         </MainWrapper>
     )
 }

@@ -1,4 +1,7 @@
+import { useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { todoListArray } from '../recoil/recoil';
 
 const DialogWrapper = styled.div`
     position : absolute;
@@ -20,24 +23,57 @@ const DialogWrapper = styled.div`
 
         .header{
             border-radius : 20px 20px 0 0;
-            height: 30px;
+            height: 50px;
             background-color : #EDFF75;
             display : flex;
             align-items : center;
-            padding-left : 1rem;
+            justify-content : center;
         }
 
         .main{
-            height : 170px;
+            height : 150px;
             display : flex;
             flex-direction : column;
             align-items: center;
-            justify-content : center;
 
             .inputer { 
                 width : 80%;
                 height : 30px;
+                border : 3px solid lightgray;
                 outline : none;
+            }
+
+            .btns{
+                margin-top : 2rem;
+
+                .successBtn,
+                .cancleBtn{
+                    border : none;
+                    border-radius : 8px;
+                    outline : none;
+                    width : 60px;
+                    height : 30px;
+                    font-family: 'HSYuji-Regular';
+
+                    &:hover{
+                        cursor : pointer;
+                    }
+                }
+
+                .successBtn{
+                    background-color : #EDFF75;
+                    margin-right : 1rem;
+
+                    &:hover{
+                        background-color : yellow;
+                    }
+                }
+
+                .cancleBtn{
+                    &:hover{
+                        background-color : gray;
+                    }
+                }
             }
         }
     }
@@ -48,15 +84,26 @@ interface Props{
 }
 
 const TodoListDialog = ({ onCloseDialog } : Props) =>{
+
+    const [todoList, setTodoList] = useRecoilState(todoListArray);
+    const textRef= useRef<HTMLInputElement>();
+
+    const onSuccessBtn = () =>{
+        const id = todoList.item[todoList.item.length-1].id + 1;
+        const value = textRef.current.value;
+        setTodoList({ date : new Date(), item: [...todoList.item, { id : id, content : value}]});
+        onCloseDialog();
+    }
+
     return(
         <DialogWrapper>
             <div className="body">
                 <div className="header">추가 하실 내용을 입력해주세요!</div>
                 <div className="main">
-                    <input className="inputer" type = "text" />
+                    <input className="inputer" type = "text" ref={textRef}/>
                     <div className="btns">
-                        <span>완료</span>
-                        <span onClick={onCloseDialog}>취소</span>
+                        <button className="successBtn" onClick={onSuccessBtn}>완료</button>
+                        <button className="cancleBtn" onClick={onCloseDialog}>취소</button>
                     </div>
                 </div>
             </div>
