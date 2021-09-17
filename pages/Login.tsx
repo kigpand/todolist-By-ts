@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import LoginInput from '../components/LoginInput';
 import LoginBtn from '../components/LoginBtn';
-import BACKGROUND from '../images/background.jpg';
-import Image from 'next/image';
 import {  useState } from 'react';
 
 export type LoginType = {
@@ -17,16 +15,8 @@ const LoginWrapper = styled.div`
     align-items : center;
     justify-content : center;
 
-    .background{
-        position: absolute;
-        top: 0;
-        left : 0;
-        width : 100%;
-        height : 100%;
-        opacity : 0.7;
-    }
-
     .loginForm{
+        background-color : lightgreen;
         width : 450px;
         height : 600px;
         border-radius : 8px;
@@ -64,9 +54,6 @@ const Login = () =>{
 
     return(
         <LoginWrapper>
-            <div className="background">
-                <Image src={BACKGROUND} alt = "배경" layout="fill"/>
-            </div>
             <div className="loginForm">
                 <div className="title">WelCome!</div>
                 <div className="otherLogin">Other</div>

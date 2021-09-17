@@ -6,23 +6,47 @@ import { useRecoilState } from 'recoil';
 import { todoListArray } from '../recoil/recoil';
 
 const SubStyled = styled.div`
+    z-index : 10;
+    display : flex;
+    flex-direction : column;
+    margin-bottom : 1rem;
     width : 400px;
-    height : 600px;
-    z-index : 1;
-    position : relative;
 
     .addCalendar{
+        width : 100%;
         border-radius : 4px;
-        background-color : white;
+        background-color : #EDFF75;
+        font-size : 2rem;
+        color : black;
+        font-family: 'HSYuji-Regular';
+        border : none;
+        outline : none;
+
+        &:hover{
+            cursor : pointer;
+        }
     }
 
-    .calendar{
-        position : absolute;
+    .calendarWrapper{
+        position : relative;
+        .calendar{
+            position : absolute;
+        }
+    }
+
+    .playBtn{
+        font-size : 3rem;
+
+        &:hover{
+            color : darkblue;
+            cursor : pointer;
+        }
     }
 `;
 const TodoListSub = () =>{
 
     const [onCalendar, setOnCalendar] = useState<boolean>(false);
+
     const [todoList, setTodoList] = useRecoilState(todoListArray);
 
     const onToggleCalendar = () =>{
@@ -31,15 +55,19 @@ const TodoListSub = () =>{
 
     const onChangeDate = (e: Date) =>{
         setTodoList({ date : e, item : []})
+        setOnCalendar(false);
     }
 
     return(
         <SubStyled>
-            <div className="addCalendar" onClick={onToggleCalendar}>달력 보기</div>
-            { onCalendar && <div className="calendar">
-                <Calendar onChange={onChangeDate} value={todoList.date}/>
-            </div>}
-            <div>테스트</div>
+            <button className="addCalendar" onClick={onToggleCalendar}>
+                날짜 지정하기
+            </button>
+            <div className="calendarWrapper">
+                { onCalendar && <div className="calendar">
+                    <Calendar onChange={onChangeDate} value={todoList.date}/>
+                </div>}
+            </div>
         </SubStyled>
     )
 }
