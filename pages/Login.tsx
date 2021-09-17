@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import LoginInput from '../components/LoginInput';
 import LoginBtn from '../components/LoginBtn';
 import {  useState } from 'react';
+import Join from '../components/Join';
 
 export type LoginType = {
     id : string,
@@ -14,6 +15,7 @@ const LoginWrapper = styled.div`
     display : flex;
     align-items : center;
     justify-content : center;
+    position : relative;
 
     .loginForm{
         background-color : lightgreen;
@@ -43,6 +45,7 @@ const LoginWrapper = styled.div`
 const Login = () =>{
 
     const [loginInfo, setLoginInfo] = useState<LoginType>({ id: null, pw: null});
+    const [onJoin, setOnJoin] = useState<boolean>(false);
 
     const onSetId = (id: string) =>{
         setLoginInfo({ id : id, pw: loginInfo.pw });
@@ -52,14 +55,25 @@ const Login = () =>{
         setLoginInfo({ id: loginInfo.id, pw: pw });
     }
 
+    const onJoinDialog = () =>{
+        setOnJoin(true);
+    }
+
+    const closeJoinDialog = () =>{
+        setOnJoin(false);
+    }
+
     return(
         <LoginWrapper>
-            <div className="loginForm">
+            { onJoin 
+            ? <Join closeJoinDialog = {closeJoinDialog}/>
+            :<div className="loginForm">
                 <div className="title">WelCome!</div>
                 <div className="otherLogin">Other</div>
                 <LoginInput onSetId={onSetId} onSetPw={onSetPw}/>
-                <LoginBtn id = {loginInfo.id} pw = {loginInfo.pw}/>
+                <LoginBtn id = {loginInfo.id} pw = {loginInfo.pw} onJoinDialog={onJoinDialog}/>
             </div>
+            }
         </LoginWrapper>
     )
 }

@@ -1,7 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styled from 'styled-components';
-import { LoginType } from '../pages/Login';
 
 const BtnWrapper = styled.div`
     width : 100%;
@@ -10,7 +9,8 @@ const BtnWrapper = styled.div`
     flex-direction : column;
     align-items : center;
     
-    div{
+    .loginBtn,
+    .joinBtn{
         width : 70%;
         height : 40px;
         margin-top : 0.5rem;
@@ -38,7 +38,13 @@ const BtnWrapper = styled.div`
     }
 `;
 
-const LoginBtn = ({ id, pw } : LoginType) =>{
+interface Props{
+    id: string,
+    pw: string,
+    onJoinDialog : ()=> void;
+}
+
+const LoginBtn = ({ id, pw, onJoinDialog } : Props) =>{
     const router = useRouter();
 
     const onLoginSubmit = () =>{
@@ -46,7 +52,7 @@ const LoginBtn = ({ id, pw } : LoginType) =>{
     }
 
     const onJoin = () =>{
-        console.log("회원가입");
+        onJoinDialog();
     }
 
     return(
