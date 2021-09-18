@@ -4,7 +4,7 @@ import LoginBtn from '../components/LoginBtn';
 import {  useState } from 'react';
 import Join from '../components/Join';
 
-export type LoginType = {
+export interface LoginType  {
     id : string,
     pw : string
 }

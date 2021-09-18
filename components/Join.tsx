@@ -1,5 +1,6 @@
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { LoginType } from '../pages/Login';
 
 const JoinWrapper = styled.div`
     width : 100%;
@@ -84,10 +85,8 @@ const JoinWrapper = styled.div`
     }
 `;
 
-interface UserInfo {
-    id : string,
+interface UserInfo extends LoginType{
     nickName : string,
-    pw : string
 }
 
 interface Props{

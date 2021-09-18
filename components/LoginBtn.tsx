@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import styled from 'styled-components';
+import { LoginType } from '../pages/Login';
 
 const BtnWrapper = styled.div`
     width : 100%;
@@ -38,9 +39,7 @@ const BtnWrapper = styled.div`
     }
 `;
 
-interface Props{
-    id: string,
-    pw: string,
+interface Props extends LoginType{
     onJoinDialog : ()=> void;
 }
 
